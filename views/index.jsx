@@ -5,22 +5,22 @@ function Index({ breads }) {
   return (
     <Default>
       <h2>Index Page</h2>
-      {/* <p>I have {breads[0].name} bread!</p> */}
-      {/* This is a JSX comment. */}
       <ul>
-        {breads.map((bread, index) => {
-          return (
-            <li key={index}>
-              <a href={`/breads/${index}`}>
-                {bread.name}
-              </a>
-            </li>
-          );
-        })}
+        <div className="backButton">
+          <a href="/breads"><button>Go back to the index</button></a>
+        </div>
+        {breads.map((bread, index) => (
+          <li key={index}>
+            <a href={`/breads/${index}`}>
+              {bread.name}
+            </a>
+          </li>
+        ))}
       </ul>
     </Default>
   );
 }
 
 module.exports = Index;
+
 
