@@ -24,12 +24,10 @@ breads.get('/:id', (req, res) => {
     })
 })
 
-
 // NEW
 breads.get('/new', (req, res) => {
   res.render('new')
 })
-
 
 // SHOW
 breads.get('/:arrayIndex', (req, res) => {
@@ -56,6 +54,13 @@ breads.post('/', (req, res) => {
   res.redirect('/breads')
 })
 
+//DELETE
+breads.delete('/:id', (req, res) => {
+  Bread.findByIdAndDelete(req.params.id) 
+    .then(deletedBread => { 
+      res.status(303).redirect('/breads')
+    })
+})
 
 
 
