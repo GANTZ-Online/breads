@@ -13,7 +13,7 @@ function Show({ bread }) {
         } have gluten.
       </p>
       <img src={bread.image} alt={bread.name} />
-      <p>Baked by {bread.baker}</p>
+      <p>{bread.getBakedBy()}</p>
       <a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>
       <label htmlFor="baker">Baker</label>
       <select name="baker" id="baker" defaultValue={bread.baker}>
