@@ -1,42 +1,39 @@
 // DEPENDENCIES
-const express = require('express')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
- 
+const express = require('express');
+
 // CONFIGURATION
-require('dotenv').config()
-const PORT = process.env.PORT
-const app = express()
+require('dotenv').config();
+const PORT = process.env.PORT;
+const app = express();
 
-  // MIDDLEWARE
-  app.set('views', __dirname + '/views')
-  app.set('view engine', 'jsx')
-  app.engine('jsx', require('express-react-views').createEngine())
-  app.use(express.static('public'))
-  app.use(express.urlencoded({extended: true}))
-  app.use(methodOverride('_method')) 
+// MIDDLEWARE
+app.use(methodOverride('_method'))
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 
-
+//mongoose call
+mongoose.connect(process.env.MONGO_URI)
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.send('Welcome to an Awesome App about Breads!')
-})
+app.get('/', (req,res) =>{
+    res.send('Welcome to an awsome App about Breads!');
+});
 
-// LISTEN
-app.listen(PORT, () => {
-  console.log('listening on port', PORT);
-})
-
-  
-  // Breads
-  const breadsController = require('./controllers/breads_controller')
-  app.use('/breads', breadsController)
-  
+//BREADS
+const breadsController = require('./controllers/breads_controllers');
+app.use('/breads', breadsController);
 
 // 404 Page
 app.get('*', (req, res) => {
-  res.send('404')
-})
+    res.send('404')
+  })
 
-mongoose.connect(process.env.MONGO_URI,)
+// LISTEN
+app.listen(PORT, () => {
+    console.log('listening on port', PORT);
+});
