@@ -14,17 +14,21 @@ breads.get('/new', (req, res, next) => {
         .catch(next); // Error handling middleware
 });
 
-// INDEX
-breads.get('/', (req, res, next) => {
-    Bread.find()
+// Index:
+breads.get('/', (req, res) => {
+    Baker.find()
+      .then(foundBakers => {
+        Bread.find()
         .then(foundBreads => {
             res.render('index', {
                 breads: foundBreads,
+                bakers: foundBakers,
                 title: 'Index Page'
-            });
+            })
         })
-        .catch(next); // Error handling middleware
-});
+      })
+  })
+  
 
 // SHOW
 breads.get('/:id', (req, res, next) => {
